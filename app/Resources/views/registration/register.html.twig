@@ -1,0 +1,25 @@
+{# app/Resources/views/registration/register.html.twig #}
+
+<head>
+	<title>Nuevo usuario</title>
+	<link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+</head>
+
+<body>
+	<div class="container">
+		<div class="col-xs-12 col-sm-12 col-md-12">
+			{{ form_start(form) }}
+		    {{ form_row(form.username) }}
+		    {{ form_row(form.email) }}
+		    {{ form_row(form.plainPassword.first) }}
+		    {{ form_row(form.plainPassword.second) }}
+
+		    <button type="submit">Registrarse</button>
+			{{ form_end(form) }}    
+		</div>
+	</div>
+	
+	{% javascripts '@jquery' '@bootstrap_js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+</body>

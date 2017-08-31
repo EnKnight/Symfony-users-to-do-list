@@ -1,0 +1,46 @@
+{# app/Resources/views/default/new.html.twig #}
+
+{#% extends 'base.html.twig' %#}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+<head>
+	<title>Tareas de {{app.session.get('user')}} </title>
+	<link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<h1>Bienvenido(a) de nuevo {{app.session.get('user')}}!</h1>
+			    {{ form_start(form) }}
+				{{ form_widget(form) }}
+				{{ form_end(form) }}
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Descripción de la tarea a realizar</th>
+							<th>Fecha para la tarea</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for task in tasks %}
+							<tr>
+								<td>{{task.task}}</td>
+								<td>{{task.dueDate|date("d/m/Y")}}</td>
+							</tr>				    
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	{% javascripts '@jquery' '@bootstrap_js' %}
+	        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+</body>
