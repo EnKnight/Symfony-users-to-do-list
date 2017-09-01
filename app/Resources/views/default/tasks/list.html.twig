@@ -1,0 +1,22 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Descripción de la tarea a realizar</th>
+						<th>Fecha para la tarea</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for t in tasks %}
+						<tr>
+							<td>{{t.task}}</td>
+							<td>{{t.dueDate|date("d/m/Y")}}</td>
+						</tr>				    
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

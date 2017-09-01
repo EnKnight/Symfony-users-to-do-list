@@ -1,13 +1,12 @@
-{# app/Resources/views/default/new.html.twig #}
 
-{#% extends 'base.html.twig' %#}
-{% form_theme form 'bootstrap_3_layout.html.twig' %}
 <head>
 	<title>Tareas de {{app.session.get('user')}} </title>
 	<link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
 </head>
 
 <body>
+	<script type="text/javascript" src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12">
@@ -17,30 +16,35 @@
 				{{ form_end(form) }}
 			</div>
 		</div>
-		
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>Descripción de la tarea a realizar</th>
-							<th>Fecha para la tarea</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for task in tasks %}
-							<tr>
-								<td>{{task.task}}</td>
-								<td>{{task.dueDate|date("d/m/Y")}}</td>
-							</tr>				    
-						{% endfor %}
-					</tbody>
-				</table>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div id="tasks-list">
+				{% include 'default/tasks/list.html.twig'%}
 			</div>
 		</div>
 	</div>
-	
-	{% javascripts '@jquery' '@bootstrap_js' %}
-	        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		// poner fecha de hoy
+    		// ...
+	        
+	        // configure the bootstrap datepicker
+	        $('.js-datepicker').datepicker().datepicker("setDate", new Date());
+
+	        $('[name="task_form"]').submit(function(e){
+		    	e.preventDefault();
+		    	var data = $(this).serializeArray();
+		    	$('input[type=text].task_desk').val("Come on ");
+		    	$.post('{{path("task_registration")}}', data, function(res){
+		    		$('#tasks-list').html(res);
+		    		// limpliar campo de tarea y setear fecha a hoy
+		    		// ...
+
+		    	});
+		    	return false;
+		    })
+	    });
+	    
+    </script>    
 </body>
