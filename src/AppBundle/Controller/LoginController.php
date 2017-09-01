@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class LoginController extends Controller{
 
 	/**
-     * @Route("/loginuser", name="user_login")
+     * @Route("/login", name="user_login")
      */
 	public function ingresoDeUsuario(Request $request){
 		// 1) build the form
