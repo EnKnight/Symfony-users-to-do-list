@@ -46,12 +46,6 @@ class User implements UserInterface{
      */
     private $username;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
-     */
-    private $plainPassword;
-
     public function __toString(){
         return $this->getUsername();
     }
@@ -64,7 +58,11 @@ class User implements UserInterface{
     }
 
     public function getRoles(){}
-    public function getPassword(){}
+
+    public function getPassword(){
+        return $this->$password;
+    }
+
     public function getUsername(){
         return $this->username;
     }
@@ -169,5 +167,13 @@ class User implements UserInterface{
     public function getTasks()
     {
         return $this->tasks;
+    }
+
+    public function getPlainPassword(){
+
+    }
+
+    public function setPlainPassword($plainPassword){
+        
     }
 }
